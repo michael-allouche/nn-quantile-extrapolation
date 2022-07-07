@@ -16,6 +16,7 @@ __pychache__
 data/
 backup/
 VM/
+paper/
 
 # Extension #
 *.csv
