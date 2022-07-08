@@ -45,10 +45,17 @@ For example, estimations applied to 500 replications of 500 samples issued from 
 Once the run is finished, all the metrics for each estimator are saved in the folder `./ckpt/DISTRIBUTION/extrapolation/.`.
 
 ## NN estimator
+Let us describe the implementation of the NN estimator of (unconditional) extreme quantiles introduced in Section 3 and illustrated in Section 6 of the [paper](LINK).
+The NN approximation $\{\tilde{f}^{{\tt NN}_J}_{\tilde\phi}}$ of the log-spacing function is fitted to the data by minimizing some distance between two estimations of the $  N=(n-1)(n-2)/2 $ log-spacings:
+\begin{align*}
+	\hat\phi=\argmin_{\tilde\phi\in\Phi} \frac{1}{N} \sum_{k=2}^{n-1}\sum_{i=1}^{k-1} \abs{	\hat{S}_{i,k} - {\tilde{f}^{{\tt NN}_J}_{\tilde\phi}}(\log(k/i),\log(n/k))}^s, \; s\in\{1,2\},
+\end{align*}
+where, for $ i=1,\dots,k-1 $ and  $ k=2,\dots,n-1$, $\hat{S}_{i,k}:=\log\left(X_{n-i+1,n}\right) - \log\left({X_{n-k+1,n}}\right)$
+is the empirical estimate of $\log q(1-i/n)-\log q(1-k/n)$.
 ### Training
 First complete the data, training and model configurations in `./configs/config_file.yaml`
 
-![config2](imgs/readme/configfile.png)
+![configfile](imgs/readme/configfile.png)
 
 Next, train each NN model replication in multi-processing by specifying the number of processes (default 1).
 ```
