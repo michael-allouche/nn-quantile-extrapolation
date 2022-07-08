@@ -13,10 +13,15 @@ __pychache__
 .Rhistory
 
 # Directories #
+################
 data/
 backup/
 VM/
 paper/
+
+# Files #
+##########
+debug.py
 
 # Extension #
 *.csv
