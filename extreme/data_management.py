@@ -55,7 +55,7 @@ class DataSampler():
         Returns
         -------
         ndarray, ndarray
-            [x, z, y], X
+            [x1, x2, y], X
         """
         threshold_K = int(n_data - (n_data * self.percentile)) - 1  # threshold K < n (integer)
 
