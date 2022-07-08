@@ -31,7 +31,7 @@ conda install --file requirements.txt
 
 - R 4.1.2
 ```
-install.packages("evt0"
+install.packages("evt0")
 ```
 
 ## Simulated data
@@ -44,7 +44,7 @@ Eight heavy-tailed distributions are implemented in `./extreme/distribution.py`
 ## EVT quantile estimators
 
 Seven bias reduced extreme quantile estimators are considered. 
-See also this [repo](https://github.com/michael-allouche/refined-weissman.git) for an extreme quantile estimator study.
+See also this [repo](https://github.com/michael-allouche/refined-weissman.git) for an extreme quantile estimation study.
 
 In `run_evt_estimators.py`, one can update the `dict_runner` with the desired parametrization. 
 Next, run `run_evt_estimators.py` to compute all the quantile estimators at level alpha=1/(2n). 
