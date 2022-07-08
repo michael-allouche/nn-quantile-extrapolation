@@ -19,7 +19,9 @@ git clone https://github.com/michael-allouche/nn-quantile-extrapolation.git
 cd nn-quantile-extrapolation
 ```
 
-Install the Python version and the library requirements used in this repo
+Install the requirements for each software version used:
+
+- Python 3.8.12
 
 ```
 conda create --name nnQextreme-session python=3.8.12
@@ -27,14 +29,22 @@ conda activate nnQextreme-session
 conda install --file requirements.txt
 ```
 
+- R 4.1.2
+```
+install.packages("evt0"
+```
+
 ## Simulated data
-Eight heavy-tailed distributions are implemented in `./extreme/distribution.py`:
+Eight heavy-tailed distributions are implemented in `./extreme/distribution.py` 
 
 **Burr, NHW, Fréchet, Fisher, GPD, Inverse Gamma, Student**.
 
+
+
 ## EVT quantile estimators
 
-Seven bias reduced extreme quantile estimators are considered.
+Seven bias reduced extreme quantile estimators are considered. 
+See also this [repo](https://github.com/michael-allouche/refined-weissman.git) for an extreme quantile estimator study.
 
 In `run_evt_estimators.py`, one can update the `dict_runner` with the desired parametrization. 
 Next, run `run_evt_estimators.py` to compute all the quantile estimators at level alpha=1/(2n). 
