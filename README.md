@@ -1,8 +1,8 @@
 # Estimation of extreme quantiles from heavy-tailed distributions with neural networks
-Implementation of the paper ["Estimation of extreme quantiles from heaby-tailed distributions with neural netwroks", 2022](LINK),
+Implementation of the paper ["Estimation of extreme quantiles from heavy-tailed distributions with neural networks", 2022](LINK),
 by Michaël Allouche, [Stéphane Girard](http://mistis.inrialpes.fr/people/girard/) and [Emmanuel Gobet](http://www.cmap.polytechnique.fr/~gobet/).
 
-The repo contains the codes for comparing our proposed extreme quantile estimator with 7 other known estimators in the literature 
+The repo contains the codes for comparing our proposed neural network quantile estimator with 7 other known estimators in the literature 
 on simulated data.
 
 ## Abstract
@@ -28,44 +28,44 @@ conda install --file requirements.txt
 ```
 
 ## Simulated data
-Seven heavy-tailed distributions are implemented in `./extreme/distribution.py`:
+Eight heavy-tailed distributions are implemented in `./extreme/distribution.py`:
 
 **Burr, NHW, Fréchet, Fisher, GPD, Inverse Gamma, Student**.
 
+## EVT quantile estimators
+
+Seven bias reduced extreme quantile estimators are considered.
+
 In `run_evt_estimators.py`, one can update the `dict_runner` with the desired parametrization. 
-Next, run `run_evt_estimators.py` to compute all the quantile estimators at both quantile levels alpha=1/n and alpha=1/(2n) . 
-For example, estimations applied to 1000 replications of 500 samples issued from a Burr distribution:
+Next, run `run_evt_estimators.py` to compute all the quantile estimators at level alpha=1/(2n). 
+For example, estimations applied to 500 replications of 500 samples issued from a Burr distribution:
 
-`python run_evt_estimators.py -d burr -r 1000 -n 500`
+`python run_evt_estimators.py -d burr -r 500 -n 500`
 
-Once the run is finished, all the metrics for each estimator are saved in the folder `./ckpt`.
+Once the run is finished, all the metrics for each estimator are saved in the folder `./ckpt/DISTRIBUTION/extrapolation/.`.
 
-In the notebook, you can display a result table. For example
+## NN estimator
+### Training
+First complete the data, training and model configurations in `./configs/config_file.yaml`
 
+![config](imgs/readme/config.png)
+
+Next, train each NN model replication in multi-processing by specifying the number of processes (default 1).
 ```
-from extreme.estimators import evt_estimators 
-evt_estimators(n_replications=1000, params={"evi":0.125, "rho": -1.},
-                distribution="burr", 
-               n_data=500, n_quantile="2n")
+python train.py --processes 2
 ```
-```
-Estimators     W	RW	CW	CH	CHp	PRBp	CHps	PRBps
 
-RMSE	      0.0471	0.0095	0.0063	0.0155	0.0149	0.015	0.0135	0.0164
-```
-You can also plot the bias, the variance and the RMSE
+After training you can plot the theoretical function (black curve), the empirical pointwise estimation (green dots) 
+and the NN estimation (purple dots):
 
-```
-from extreme import visualization as statsviz
-statsviz.evt_quantile_plot(n_replications=1000, 
-   		           params={"evi":0.125, "rho": -0.125}, 
-                           distribution="burr", 
-                           n_data=500, 
-                           n_quantile="2n")
-```
-![simulations](imgs/simulations_test.jpg)
+![f](imgs/readme/f_funcNN.png)
 
-## Conditional extension - rainfall data on the Cevennes-Vivarais region (France)
+## Results
+
+The median estimator and the RMedSE of our NN model and the 7 other quantile estimators can be visualized for 
+a given heavy tailed parametrization. The RMedSE performance criteria (eq 32, p.13) is emphasized in the legend. 
+
+![quantile](imgs/readme/quantile_estimation.png)
 
 
 ## Citing
