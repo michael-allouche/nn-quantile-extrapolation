@@ -1,0 +1,58 @@
+# =========================================================================
+# Distribution:
+# -------------------------
+# generalized function (for the Jth order condition)
+#   - q0: float  # initial point q(0)
+#   - evi: float  # extreme value index
+#   - rho: list  # \bar rho_j order parameter
+#   - scale: list  # lambda_j just for generalized distribution
+# ////////////////////////////
+# burr
+#   - evi: float  # extreme value index
+#   - rho: list  # \bar rho_j order parameter
+# ////////////////////////////
+# frechet
+#   - evi: float  # extreme value index
+# ////////////////////////////
+# fisher
+#   - evi: float  # extreme value index
+# ////////////////////////////
+# invgamma
+#   - evi: float  # extreme value index
+# ////////////////////////////
+# gpd
+#   - evi: float  # extreme value index
+# ////////////////////////////
+
+# -------------------------
+# Optimizers:
+# -------------------------
+# adam, rmsp, sgd
+
+# Losses:
+# -------------------------
+# l1, l2
+
+# ==========================================================================
+
+data:
+  distribution: burr  # {generalized, burr, frechet, fisher, invgamma, gpd}
+  params:
+    evi: !!float 1.  # extreme value index
+    rho: [-0.25]  # \bar rho_J , ...,\bar rho_2 < 0, Jth order parameter
+  n_data: !!int 500  # n
+  percentile: !!float 0.  # percentile of data for training (ie if 0, train on all available) (for getting threshold K)
+
+training:
+  n_epochs: !!int 5  # 500
+  batch_size: !!int 1024
+  loss: "l1"
+  verbose: !!int 1  # save parameters and compute metrics every X epochs
+  replications: !!int 5  # 500
+
+model:
+  trunc: !!int 4  # truncation J>1 in the series.
+  optimizer: adam
+  lr: !!float 1e-3
+  lamb: !!float 0.  # regularization parameter
+

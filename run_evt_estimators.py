@@ -1,6 +1,8 @@
 from extreme.estimators import evt_estimators
 from itertools import product
 
+# Quantile extrapolation estimation based on estimators in the literature
+
 dict_runner = {"burr": {"evi": [1.], "rho": [-0.125,-0.25, -0.5, -1., -2.]},
                #"burr": {"evi": [0.125, 0.25, 0.5], "rho": [-0.125]},
                "frechet": {"evi": [0.125, 0.25, 0.5, 1.]},
