@@ -48,7 +48,7 @@ Once the run is finished, all the metrics for each estimator are saved in the fo
 ### Training
 First complete the data, training and model configurations in `./configs/config_file.yaml`
 
-![config](imgs/readme/config.png)
+![config2](imgs/readme/configfile.png)
 
 Next, train each NN model replication in multi-processing by specifying the number of processes (default 1).
 ```
@@ -69,3 +69,4 @@ a given heavy tailed parametrization. The RMedSE performance criteria (eq 32, p.
 
 
 ## Citing
+$x^2$
