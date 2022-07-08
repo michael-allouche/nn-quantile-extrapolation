@@ -71,4 +71,3 @@ a given heavy tailed parametrization. The RMedSE performance criteria (eq 32, p.
 
 
 ## Citing
-$x^2$
