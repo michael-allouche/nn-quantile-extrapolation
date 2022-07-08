@@ -81,9 +81,13 @@ def training_plot(k_anchor, epoch=None, show_as_video=False, saved=False, **mode
         # axes[0, 0].set_ylabel("log spaces $Y$")
         axes[0, 0].spines["left"].set_color("black")
         axes[0, 0].spines["bottom"].set_color("black")
-        axes[0, 0].set_title("Regression plot\n{}: {} \n(epoch={})".format(summary_file["distribution"].capitalize(),
-                                                                           str(summary_file["params"]).upper(),
-                                                                            epoch), fontweight="bold")
+        # axes[0, 0].set_title("Regression plot\n{}: {} \n(epoch={})".format(summary_file["distribution"].capitalize(),
+        #                                                                    str(summary_file["params"]).upper(),
+        #                                                                     epoch), fontweight="bold")
+
+        axes[0, 0].set_title("Regression plot\n{}: {}".format(summary_file["distribution"].capitalize(),
+                                                                           str(summary_file["params"]).upper()
+                                                                            ), fontweight="bold")
         # axes[0, 0].set_ylim(-5, 2)
         plt.xticks(fontsize=20)
         plt.yticks(fontsize=20)

@@ -3,8 +3,7 @@ import scipy.stats
 from rpy2 import robjects as ro
 import rpy2.robjects.numpy2ri
 
-from extreme.data_management import load_quantiles, DataSampler, load_real_data, spacings
-from extreme import get_slope
+from extreme.data_management import load_quantiles, DataSampler
 import numpy as np
 from pathlib import Path
 
@@ -589,7 +588,7 @@ def tree_2D(X, k_u, k_d, j_l, j_r):
 
 
 
-def evt_estimators(n_replications, n_data, distribution, params, metric="mean", return_full=False):
+def evt_estimators(n_replications, n_data, distribution, params, metric="median", return_full=False):
     """
     Evaluation of extreme quantile estimators based on simulated heavy-tailed data
 
@@ -651,14 +650,12 @@ def evt_estimators(n_replications, n_data, distribution, params, metric="mean", 
             dict_evt[estimator]["mean"]["rmse"] = ((np.array(dict_evt[estimator]["mean"]["series"]) / real_quantile - 1) ** 2).mean(axis=0)
             dict_evt[estimator]["mean"]["series"] = np.array(dict_evt[estimator]["mean"]["series"]).mean(axis=0)
             dict_evt[estimator]["mean"]["rmse_bestK"] = ((np.array(dict_evt[estimator]["mean"]["q_bestK"]) / real_quantile - 1) ** 2).mean()
-            # dict_evt[estimator]["mean"]["logmse_bestK"] = ((np.log(dict_evt[estimator]["mean"]["q_bestK"]) - np.log(real_quantile)) ** 2).mean()
 
             # MEDIAN
             dict_evt[estimator]["median"]["var"] = np.array(dict_evt[estimator]["median"]["series"]).var(axis=0)
             dict_evt[estimator]["median"]["rmse"] = np.median((np.array(dict_evt[estimator]["median"]["series"]) / real_quantile - 1) ** 2, axis=0)
             dict_evt[estimator]["median"]["series"] = np.median(dict_evt[estimator]["median"]["series"], axis=0)
             dict_evt[estimator]["median"]["rmse_bestK"] = np.median((np.array(dict_evt[estimator]["median"]["q_bestK"]) / real_quantile - 1) ** 2)
-            # dict_evt[estimator]["median"]["logmse_bestK"] = np.median((np.log(dict_evt[estimator]["median"]["q_bestK"]) - np.log(real_quantile)) ** 2)
 
         np.save(Path(pathdir, "evt_estimators_rep{}_ndata{}.npy".format(n_replications, n_data)), dict_evt)
 
@@ -667,7 +664,6 @@ def evt_estimators(n_replications, n_data, distribution, params, metric="mean", 
     df = pd.DataFrame(columns=list_estimators, index=["RMSE"])
     for estimator in list_estimators:
         df.loc["RMSE", estimator] = dict_evt[estimator][metric]["rmse_bestK"]
-        # df.loc["LOGMSE", estimator] = dict_evt[estimator][metric]["logmse_bestK"]
     return df
 
 

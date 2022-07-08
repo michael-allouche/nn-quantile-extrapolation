@@ -1,7 +1,6 @@
 import datetime
 
 import pandas as pd
-import numpy as np
 from utils import get_config, save_config_summary
 from extreme.data_management import DataSampler
 from models import ExtrapolateNN
@@ -16,12 +15,9 @@ parser.add_argument('--processes', '-p',
                     help="number of processes. No multiprocessing by default",
                     default=1,
                     type=int)
-# parser.add_argument('--data', '-d',
-#                     help="Type of data. Please choose between the following ones:{'sim'} ",
-#                     default="sim")
+
 args = parser.parse_args()
 n_processes = args.processes
-# data_type = args.data
 
 config = get_config()  # load .yaml configuration file
 condition = len(config["data"]["params"]["rho"]) + 1  # data order condition
