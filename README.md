@@ -81,3 +81,13 @@ a given heavy tailed parametrization. The RMedSE performance criteria (eq 32, p.
 
 
 ## Citing
+@article{allouche2024estimation,
+  title={Estimation of extreme quantiles from heavy-tailed distributions with neural networks},
+  author={Allouche, Micha{\"e}l and Girard, St{\'e}phane and Gobet, Emmanuel},
+  journal={Statistics and Computing},
+  volume={34},
+  number={1},
+  pages={12},
+  year={2024},
+  publisher={Springer}
+}
